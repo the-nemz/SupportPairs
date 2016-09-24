@@ -24,8 +24,10 @@ public class SupportController {
      * Handles all of the routing.
      */
     private void setupEndpoints() {
-        post(API_CONTEXT + "/games", "application/json", (request, response) -> {
+        post(API_CONTEXT + "/mentee", "application/json", (request, response) -> {
             try {
+                response.status(201);
+                this.service.createMentee(request.body());
                 response.status(201);
             } catch(Exception ex) {
                 //unexpected exception
@@ -34,6 +36,30 @@ public class SupportController {
             return Collections.EMPTY_MAP;
         }, new JsonTransformer());
 
+        post(API_CONTEXT + "/mentor", "application/json", (request, response) -> {
+            try {
+                response.status(201);
+                this.service.createMentor(request.body());
+                response.status(201);
+            } catch(Exception ex) {
+                //unexpected exception
+                response.status(500);
+            }
+            return Collections.EMPTY_MAP;
+        }, new JsonTransformer());
+
+        post(API_CONTEXT + "/mentor/:username", "application/json", (request, response) -> {
+            try {
+                String mentorname = request.params(":username");
+                response.status(201);
+                this.service.makePair(mentorname, request.body());
+                response.status(201);
+            } catch(Exception ex) {
+                //unexpected exception
+                response.status(500);
+            }
+            return Collections.EMPTY_MAP;
+        }, new JsonTransformer());
 
     }
 }
