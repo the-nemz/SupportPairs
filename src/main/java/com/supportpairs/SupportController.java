@@ -57,7 +57,39 @@ public class SupportController {
             return Collections.EMPTY_MAP;
         }, new JsonTransformer());
 
-        post(API_CONTEXT + "/mentor/:username", "application/json", (request, response) -> {
+        get(API_CONTEXT + "/mentor/:username", "application/json", (request, response) -> {
+            try {
+                String username = request.params(":username");
+                response.status(201);
+                return this.service.getMentor(username);
+            } catch (InvalidPersonException ex) {
+                System.out.println(ex);
+                response.status(404);
+            } catch(Exception ex) {
+                //unexpected exception
+                System.out.println(ex);
+                response.status(500);
+            }
+            return Collections.EMPTY_MAP;
+        }, new JsonTransformer());
+
+        get(API_CONTEXT + "/mentee/:username", "application/json", (request, response) -> {
+            try {
+                String username = request.params(":username");
+                response.status(201);
+                return this.service.getMentee(username);
+            } catch (InvalidPersonException ex) {
+                System.out.println(ex);
+                response.status(404);
+            } catch(Exception ex) {
+                //unexpected exception
+                System.out.println(ex);
+                response.status(500);
+            }
+            return Collections.EMPTY_MAP;
+        }, new JsonTransformer());
+
+        post(API_CONTEXT + "/mentor/:username/pair", "application/json", (request, response) -> {
             System.out.println("make pair");
             try {
                 String mentorname = request.params(":username");
@@ -82,6 +114,37 @@ public class SupportController {
                 String mentorname = request.params(":username");
                 response.status(201);
                 this.service.approveMentor(mentorname);
+            } catch(Exception ex) {
+                //unexpected exception
+                response.status(500);
+            }
+            return Collections.EMPTY_MAP;
+        }, new JsonTransformer());
+
+        post(API_CONTEXT + "/mentor/:username/terminate", "application/json", (request, response) -> {
+            try {
+                String mentorname = request.params(":username");
+                response.status(201);
+                this.service.terminateMentor(mentorname, request.body());
+            } catch (InvalidPersonException ex) {
+                System.out.println(ex);
+                response.status(404);
+            } catch (TerminatePairException ex) {
+                System.out.println(ex);
+                response.status(400);
+            } catch(Exception ex) {
+                //unexpected exception
+                System.out.println(ex);
+                response.status(500);
+            }
+            return Collections.EMPTY_MAP;
+        }, new JsonTransformer());
+
+        get(API_CONTEXT + "/mentors/:condition", "application/json", (request, response) -> {
+            try {
+                String condname = request.params(":condition");
+                response.status(201);
+                return this.service.findMentors(condname);
             } catch(Exception ex) {
                 //unexpected exception
                 response.status(500);

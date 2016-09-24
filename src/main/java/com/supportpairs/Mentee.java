@@ -8,12 +8,16 @@ public class Mentee extends Person {
     public transient Mentor mentor;
 
     public Mentee(String email, String username, String password, int age,
-                  String[] conditions) {
+                  Condition[] conditions) {
         this.email = email;
         this.username = username;
         this.password = password;
         this.age = age;
         this.conditions = conditions;
+    }
+
+    public void removeMentor() {
+        this.mentor = null;
     }
 
 }

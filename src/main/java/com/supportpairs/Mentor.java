@@ -6,7 +6,7 @@ package com.supportpairs;
 public class Mentor extends Person {
 
     public String fullName;
-    public char gender;
+    public String gender;
     public int max;
     public int active;
     public int past;
@@ -14,7 +14,7 @@ public class Mentor extends Person {
     public boolean approved;
 
     public Mentor(String email, String username, String password, int age,
-                  String[] conditions, String fullName, char gender,
+                  Condition[] conditions, String fullName, String gender,
                   int max) {
         this.email = email;
         this.username = username;
@@ -36,7 +36,7 @@ public class Mentor extends Person {
 
     public boolean addMentee(Mentee mentee) {
         if ((this.max - this.active) > 0) {
-            for (int a = 0; a < mentees.length; a++) {
+            for (int a = 0; a < this.mentees.length; a++) {
                 if (this.mentees[a] == null) {
                     this.mentees[a] = mentee;
                     return true;
@@ -44,6 +44,28 @@ public class Mentor extends Person {
             }
         }
         return false;
+    }
+
+    public boolean hasCondition(String condname) {
+        for (int a = 0; a < this.conditions.length; a++) {
+            if (this.conditions[a].name.equals(condname)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeMentee(Mentee mentee) {
+        boolean removed = false;
+        for (int a = 0; a < this.mentees.length; a++) {
+            if (removed) {
+                this.mentees[a - 1] = this.mentees[a];
+                this.mentees[a] = null;
+            } else if (this.mentees[a].equals(mentee)) {
+                this.mentees[a] = null;
+            }
+        }
+        return removed;
     }
 
 }
