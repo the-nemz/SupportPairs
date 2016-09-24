@@ -33,7 +33,9 @@ public class SupportService {
                     "USERNAME       TEXT    PRIMARY KEY NOT NULL, " +
                     "EMAIL          TEXT    NOT NULL," +
                     "PASSWORD       TEXT    NOT NULL," +
-                    "CONDITIONS     TEXT    NOT NULL," +
+                    "CONDITION1     TEXT    NOT NULL," +
+                    "CONDITION2     TEXT," +
+                    "CONDITION3     TEXT," +
                     "AGE            INT     NOT NULL," +
                     "FULLNAME       TEXT    NOT NULL," +
                     "GENDER         TEXT    NOT NULL," +
@@ -59,8 +61,9 @@ public class SupportService {
                          "USERNAME      TEXT    PRIMARY KEY NOT NULL, " +
                          "EMAIL         TEXT    NOT NULL," +
                          "PASSWORD      TEXT    NOT NULL," +
-                         "CONDITIONS    TEXT    NOT NULL," +
-                         "AGE           INT     NOT NULL," +
+                         "CONDITION1     TEXT    NOT NULL," +
+                         "CONDITION2     TEXT," +
+                         "CONDITION3     TEXT," +                         "AGE           INT     NOT NULL," +
                          "MENTOR        TEXT)" ;
             conn.createQuery(sql).executeUpdate();
             System.out.println("created mentees db");
@@ -100,11 +103,14 @@ public class SupportService {
         if (!mentee.isValid(this.mentorDB, this.menteeDB)) {
             throw new InvalidPersonException();
         }
-        String conds = new Gson().toJson(mentee.conditions);
-        String sql = "INSERT INTO MENTEES (USERNAME, EMAIL, PASSWORD, CONDITIONS, AGE) " +
+        String cond1 = new Gson().toJson(mentee.condition1);
+        String cond2 = new Gson().toJson(mentee.condition2);
+        String cond3 = new Gson().toJson(mentee.condition3);
+        String sql = "INSERT INTO MENTEES (USERNAME, EMAIL, PASSWORD, CONDITION1, " +
+                     "CONDITION2, CONDITION3, AGE) " +
                      "VALUES ('" + mentee.username + "', '" + mentee.email +
-                     "', '" + mentee.password + "', '" + conds +
-                     "', " + String.valueOf(mentee.age) + ");";
+                     "', '" + mentee.password + "', '" + cond1 + "', '" + cond2 +
+                     "', '" + cond3 + "', " + String.valueOf(mentee.age) + ");";
         System.out.println(sql);
         try (Connection conn = this.menteeDB.open()){
             conn.createQuery(sql).executeUpdate();
@@ -120,17 +126,20 @@ public class SupportService {
         if (!mentor.isValid(this.mentorDB, this.menteeDB)) {
             throw new InvalidPersonException();
         }
-        String conds = new Gson().toJson(mentor.conditions);
+        String cond1 = new Gson().toJson(mentor.condition1);
+        String cond2 = new Gson().toJson(mentor.condition2);
+        String cond3 = new Gson().toJson(mentor.condition3);
         int approved = 0;
         if (mentor.approved) {
             approved = 1;
         } else {
             approved = 0;
         }
-        String sql = "INSERT INTO MENTORS (USERNAME, EMAIL, PASSWORD, CONDITIONS, AGE, " +
+        String sql = "INSERT INTO MENTORS (USERNAME, EMAIL, PASSWORD, CONDITIONS1, " +
+                "CONDITION2, CONDITION3, AGE, " +
                 "FULLNAME, GENDER, MAX, ACTIVE, PAST, APPROVED) " +
                 "VALUES ('" + mentor.username + "', '" + mentor.email +
-                "', '" + mentor.password + "', '" + conds +
+                "', '" + mentor.password + "', '" + cond1 + "', '" + cond2 + "', '" + cond3 +
                 "', " + String.valueOf(mentor.age) + ", '" + mentor.fullName +
                 "', '" + mentor.gender + "', " + String.valueOf(mentor.max) + ", " +
                 mentor.active + ", " + mentor.past + ", " + approved + ");";
@@ -209,8 +218,14 @@ public class SupportService {
 
     public Mentor[] findMentors(String condname) {
         ArrayList<Mentor> matches = new ArrayList<Mentor>();
+        System.out.println("heyhey");
         List<Mentor> mentors = this.getAllMentors();
+        System.out.println(mentors.size());
         for (int a = 0; a < mentors.size(); a++) {
+            System.out.println("hohoho");
+            System.out.println(mentors.get(a).username);
+            //System.out.println(new Gson().toJson(mentors.get(a)));
+            //System.out.println(mentors.get(a).conditions[0].details);
             if (mentors.get(a).hasCondition(condname)) {
                 matches.add(mentors.get(a));
             }

@@ -12,7 +12,9 @@ public class Person {
 
     public String username;
     public int age;
-    public Condition[] conditions;
+    public Condition condition1;
+    public Condition condition2;
+    public Condition condition3;
     public String email;
     public String password;
 

@@ -1,5 +1,9 @@
 package com.supportpairs;
 
+import com.google.gson.Gson;
+
+import java.util.*;
+
 /**
  * Created by Isaac on 9/23/2016.
  */
@@ -14,13 +18,12 @@ public class Mentor extends Person {
     public boolean approved;
 
     public Mentor(String email, String username, String password, int age,
-                  Condition[] conditions, String fullName, String gender,
+                  String fullName, String gender,
                   int max) {
         this.email = email;
         this.username = username;
         this.password = password;
         this.age = age;
-        this.conditions = conditions;
         this.fullName = fullName;
         this.gender = gender;
         this.max = max;
@@ -47,10 +50,14 @@ public class Mentor extends Person {
     }
 
     public boolean hasCondition(String condname) {
-        for (int a = 0; a < this.conditions.length; a++) {
-            if (this.conditions[a].name.equals(condname)) {
-                return true;
-            }
+        Gson gson = new Gson();
+        System.out.println("has cond?");
+/*        System.out.println((String) this.conditions);
+        this.conditions = this.conditionBuilder(this.conditions);*/
+        if (this.condition1.name.equals(condname) ||
+                this.condition2.name.equals(condname) ||
+                this.condition3.name.equals(condname)) {
+            return true;
         }
         return false;
     }
@@ -67,5 +74,18 @@ public class Mentor extends Person {
         }
         return removed;
     }
+
+/*    public Condition[] conditionBuilder(String json) {
+        ArrayList<Condition> condlist = new ArrayList<Condition>();
+        int from = 0;
+        while (json.indexOf('}', from) != -1) {
+            int first = json.indexOf('{', from);
+            int second = json.indexOf('}', from);
+            condlist.add(new Gson().fromJson(json.substring(first, second + 1), Condition.class));
+            from = second + 1;
+        }
+    }*/
+
+
 
 }
