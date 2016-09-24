@@ -30,6 +30,10 @@ public class Mentor extends Person {
         this.approved = false;
     }
 
+    public void validate() {
+        this.approved = true;
+    }
+
     public boolean addMentee(Mentee mentee) {
         if ((this.max - this.active) > 0) {
             for (int a = 0; a < mentees.length; a++) {
@@ -41,4 +45,5 @@ public class Mentor extends Person {
         }
         return false;
     }
+
 }

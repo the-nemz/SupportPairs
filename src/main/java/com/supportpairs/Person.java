@@ -15,12 +15,14 @@ public class Person {
 
     public boolean isValid(HashMap<String, Mentor> mentors,
                            HashMap<String, Mentee> mentees) {
-        if (mentors.containsKey(this.email) || mentors.containsKey(this.email)) {
+        System.out.println("checker: " + this.email);
+        if (mentees.containsKey(this.email) || mentors.containsKey(this.email)) {
             return false;
         }
-        if (mentors.containsKey(this.username) || mentors.containsKey(this.username)) {
+        if (mentees.containsKey(this.username) || mentors.containsKey(this.username)) {
             return false;
         }
+        System.out.println("will return true");
         return true;
     }
 

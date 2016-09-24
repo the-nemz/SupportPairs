@@ -17,6 +17,7 @@ public class SupportController {
 
     public SupportController(SupportService supportService) {
         this.service = supportService;
+        System.out.println("controller setup");
         setupEndpoints();
     }
 
@@ -25,35 +26,62 @@ public class SupportController {
      */
     private void setupEndpoints() {
         post(API_CONTEXT + "/mentee", "application/json", (request, response) -> {
+            System.out.println("mentee");
             try {
                 response.status(201);
-                this.service.createMentee(request.body());
-                response.status(201);
+                return this.service.createMentee(request.body());
+            } catch (InvalidPersonException ex) {
+                System.out.println(ex);
+                response.status(404);
             } catch(Exception ex) {
                 //unexpected exception
+                System.out.println(ex);
                 response.status(500);
             }
             return Collections.EMPTY_MAP;
         }, new JsonTransformer());
 
         post(API_CONTEXT + "/mentor", "application/json", (request, response) -> {
+            System.out.println("mentor");
             try {
                 response.status(201);
-                this.service.createMentor(request.body());
-                response.status(201);
+                return this.service.createMentor(request.body());
+            } catch (InvalidPersonException ex) {
+                System.out.println(ex);
+                response.status(404);
             } catch(Exception ex) {
                 //unexpected exception
+                System.out.println(ex);
                 response.status(500);
             }
             return Collections.EMPTY_MAP;
         }, new JsonTransformer());
 
         post(API_CONTEXT + "/mentor/:username", "application/json", (request, response) -> {
+            System.out.println("make pair");
             try {
                 String mentorname = request.params(":username");
                 response.status(201);
                 this.service.makePair(mentorname, request.body());
+            } catch (InvalidPersonException ex) {
+                System.out.println(ex);
+                response.status(404);
+            } catch (AddMenteeException ex) {
+                System.out.println(ex);
+                response.status(400);
+            } catch(Exception ex) {
+                //unexpected exception
+                System.out.println(ex);
+                response.status(500);
+            }
+            return Collections.EMPTY_MAP;
+        }, new JsonTransformer());
+
+        put(API_CONTEXT + "/mentor/:username/approve", "application/json", (request, response) -> {
+            try {
+                String mentorname = request.params(":username");
                 response.status(201);
+                this.service.approveMentor(mentorname);
             } catch(Exception ex) {
                 //unexpected exception
                 response.status(500);
