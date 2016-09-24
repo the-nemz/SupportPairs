@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pairents</title>
+    <title>SupportPairs</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="bootstrap-elements.html">SupportPairs</a>
+                <a class="navbar-brand" href="index.html">SupportPairs</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -206,122 +206,83 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Personal Information
+                            Submit new information
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Your Profile
+                                <i class="fa fa-table"></i> Edit Profile
                             </li>
                         </ol>
                     </div>
                 </div>
+                <!-- Forms -->
+                <div>
+                    <form name= "fullNameForm" id="fullNameForm" method="post">
+                        <p>
+                            <label>
+                                Full Name
+                            </label>
+                            <input type="text" name="fname" id="fname" value=""/>
+                        </p>
+                        <button type="button" onclick="editFullName();"> Submit </button>
+                    </form>
+                    <br>
 
-                <!-- Main jumbotron for a primary marketing message or call to action -->
-                <div class="jumbotron">
-                    <h4> About Me:</h4>
-                    <p> 
-                        <script>
-                        writeInfoParagraph()
-                        </script>
-                    </p>
-                    <h4> Contact Me:</h4>
-                    <p> Email: 
-                        <script>
-                        writeEmail()
-                        </script>
-                    <p>
-                    <!--
-                    <section>
-                        <div id="messages"></div>
-                    <input id="chat-input" type="text" placeholder="say anything" autofocus/>
-                    </section>
-
-                    <script src="//media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
-                    <script src="//media.twiliocdn.com/sdk/js/ip-messaging/v0.10/twilio-ip-messaging.min.js"></script>
-                    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-                    <script src="index.js"></script>
-                    -->
                 </div>
-                <!-- /.row -->
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h2>Connections</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Connection</th>
-                                        <th>Condition</th>
-                                        <th>History</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Isaac Nemzer</td>
-                                        <td>Leukemia</td>
-                                        <td>5 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Steven Arabov</td>
-                                        <td>Leukemia</td>
-                                        <td>2 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Luca McLucaSon</td>
-                                        <td>Cancer</td>
-                                        <td>3 weeks</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <h2>Conditions</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Conditions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <script>
-                                                writeConditions(0)
-                                                //function call
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <script>
-                                                writeConditions(1)
-                                                //function call
-                                            </script>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <script>
-                                                writeConditions(2)
-                                                //function call
-                                            </script>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div>
+                    <form name= "emailForm" id="emailForm" method="post">
+                        <p>
+                            <label>
+                                Email
+                            </label>
+                            <input type="text" name="email" id="email" value=""/>
+                        </p>
+                        <button type="button" onclick="editEmail();"> Submit </button>
+                    </form>
                 </div>
-                <!-- /.row -->
+                <div>
+                    <form name= "infoForm" id="infoForm" method="post">
+                        <p>
+                            <label>
+                                Edit Info Paragraph
+                            </label>
+                            <input type="text" name="infoParagraph" id="infoP" value=""/>
+                        </p>
+                        <button type="button" onclick="newInfoP();"> Submit </button>
+                    </form>
+                </div>
+                <div>
+                    <form name= "addConditionForm" id="conditionForm" method="post">
+                        <p>
+                            <label>
+                                Add Condition
+                            </label>
+                            <input type="text" name="newCondition" id="newCond" value=""/>
+                        </p>
+                        <button type="button" onclick="appendCondition();"> Submit </button>
+                    </form>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <form name= "clearConditionForm" id="conditionForm2" method="post">
+                        <p>
+                            <label>
+                                Clear Conditions
+                            </label>
+                        </p>
+                        <button type="button" onclick="clearConditions();"> CLEAR </button>
+                    </form>
+                </div>
 
-               
-            <button type="submit" class="btn btn-default" onclick="window.location='editprofile.html'; return false;">Edit Profile</button>
+
+
+            <br>
+            <br>
+            <button type="submit" class="btn btn-default" onclick="window.location='tables.html'; return false;">Cancel</button>
             </div>
             <!-- /.container-fluid -->
 
