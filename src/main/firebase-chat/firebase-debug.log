@@ -1,0 +1,28 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\Robert\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] CLI Version:  3.0.7
+[debug] Platform:     win32
+[debug] Node Version: v4.0.0
+[debug] Time:         Sat Sep 24 2016 17:23:22 GMT-0400 (Eastern Daylight Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: C:\Users\Robert\Documents\Dev\Android\SupportPairs\src\main\firebase-chat
+[info] Public Directory: ./
+[info] 
+[info] Server listening at: http://localhost:5000
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\Robert\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] CLI Version:  3.0.7
+[debug] Platform:     win32
+[debug] Node Version: v4.0.0
+[debug] Time:         Sat Sep 24 2016 17:32:18 GMT-0400 (Eastern Daylight Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: C:\Users\Robert\Documents\Dev\Android\SupportPairs\src\main\firebase-chat
+[info] Public Directory: ./
+[info] 
+[info] Server listening at: http://localhost:5000
